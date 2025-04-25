@@ -52,7 +52,6 @@ app.UseCors("TSWMSPolicy");
 if (app.Environment.IsDevelopment() || environment == "Docker")
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
 }
 
 app.UseSwaggerForOcelotUI(options =>

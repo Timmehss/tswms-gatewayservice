@@ -5,7 +5,7 @@
       "Config": [
         {
           "Name": "GatewayService.Api",
-          "Version": "dev",
+          "Version": "1.0",
           "Url": "http://gatewayservice:3000/swagger/v1/swagger.json"
         }
       ]
@@ -15,7 +15,7 @@
       "Config": [
         {
           "Name": "UserService.Api",
-          "Version": "dev",
+          "Version": "1.0",
           "Url": "http://userservice:3100/swagger/v1/swagger.json"
         }
       ]
@@ -25,7 +25,7 @@
       "Config": [
         {
           "Name": "OrderService.Api",
-          "Version": "dev",
+          "Version": "1.0",
           "Url": "http://orderservice:3200/swagger/v1/swagger.json"
         }
       ]
@@ -35,7 +35,7 @@
       "Config": [
         {
           "Name": "ProductService.Api",
-          "Version": "dev",
+          "Version": "1.0",
           "Url": "http://productservice:3300/swagger/v1/swagger.json"
         }
       ]
