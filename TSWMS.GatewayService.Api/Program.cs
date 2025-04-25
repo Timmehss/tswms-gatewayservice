@@ -10,23 +10,15 @@ using Ocelot.Provider.Polly;
 var builder = WebApplication.CreateBuilder(args);
 
 // Get Environment
-var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-
-// Configure CORS Policy
-builder.Services.AddCors(o => o.AddPolicy("TSWMSPolicy", builder =>
-{
-    builder.AllowAnyHeader()
-           .AllowAnyMethod()
-           .AllowAnyHeader()
-           .SetIsOriginAllowed((host) => true)
-           .AllowCredentials();
-}));
+var environment = builder.Environment.EnvironmentName;
 
 var routes = "Routes";
 
 // Load environment specific configuration
 builder.Configuration
-    .AddJsonFile($"appsettings.{environment}.json")
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{environment}.json", optional: true, reloadOnChange: true)
     .AddOcelotWithSwaggerSupport(options =>
     {
         options.Folder = $"{routes}/{environment}";
@@ -38,6 +30,15 @@ builder.Services
 
 builder.Services.AddSwaggerForOcelot(builder.Configuration);
 
+// Add CORS Policy
+builder.Services.AddCors(o => o.AddPolicy("TSWMSPolicy", builder =>
+{
+    builder.SetIsOriginAllowed((host) => true)
+           .AllowAnyMethod()
+           .AllowAnyHeader()
+           .AllowCredentials();
+}));
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -47,10 +48,11 @@ var app = builder.Build();
 // Use CORS
 app.UseCors("TSWMSPolicy");
 
-// Configure the HTTP request pipeline
-if (app.Environment.IsDevelopment())
+// Configure request pipeline
+if (app.Environment.IsDevelopment() || environment == "Docker")
 {
     app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseSwaggerForOcelotUI(options =>
