@@ -13,7 +13,7 @@
       "SwaggerKey": "products",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
+          "Host": "productservice",
           "Port": 3300
         }
       ]
