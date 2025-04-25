@@ -1,5 +1,5 @@
 {
   "GlobalConfiguration": {
-    "BaseUrl": "http://gatewayservice:3000"
+    "BaseUrl": "http://gatewayservice:8080"
   }
 }
