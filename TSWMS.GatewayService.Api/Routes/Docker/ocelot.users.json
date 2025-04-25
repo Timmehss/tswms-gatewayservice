@@ -14,7 +14,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "userservice",
-          "Port": 8080
+          "Port": 3100
         }
       ]
     }
